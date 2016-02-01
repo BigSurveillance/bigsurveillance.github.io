@@ -25,12 +25,12 @@
 var CandidateController = Composer.Controller.extend({
 
     events: {
-        'click button.tweet_link': 'tweet',
-        'click button.info_link': 'info',
-        'click h4': 'tweet',
-        'click .headshot': 'tweet',
-        'click .inline_tweet': 'tweet',
-        'click .peekaboo': 'click'
+        // 'click button.tweet_link': 'tweet',
+        // 'click button.info_link': 'info',
+        // 'click h4': 'tweet',
+        'click .candidate_shot': 'info'
+        // 'click .inline_tweet': 'tweet',
+        // 'click .peekaboo': 'click'
     },
 
     elements: {
@@ -61,9 +61,9 @@ var CandidateController = Composer.Controller.extend({
             handle = '.@' + handle;
         }
 
-        var url = window.location.protocol + '//' + window.location.host + '?candidate=' + this.model.get('name').repalce(" ", "_");
+        var url = window.location.protocol + '//' + window.location.host + '?candidate=' + this.model.get('name').replace(" ", "_");
 
-        var txt = encodeURIComponent(name + ', something something surveillance ' + url);
+        var txt = encodeURIComponent(handle + ', something something surveillance ' + url);
         window.open('https://twitter.com/intent/tweet?text=' + txt);
     },
 
@@ -84,6 +84,7 @@ var CandidateController = Composer.Controller.extend({
             this.info();
     }
 });
+
 ;var CandidateModalController = BaseShareModalController.extend({
 
     init: function() {
@@ -1034,7 +1035,7 @@ var Candidates = Composer.Collection.extend({
     var
         div = $c('div'),
         headshot = $c('div'),
-        img = $c('i'),            // JL NOTE ~ chrome bug fix, remove after issue is gone
+        img = $c('img'),            // JL NOTE ~ chrome bug fix, remove after issue is gone
         tweetLink = $c('button'),
         infoLink = $c('button'),
         name = $c('h4'),
@@ -1042,28 +1043,15 @@ var Candidates = Composer.Collection.extend({
         rollover = $c('div');
 
 
-    headshot.classList.add('headshot');
-
-    img.classList.add('congressional-head', data.image.replace('.jpg', ''));
     headshot.appendChild(img);
-
+    img.src = "/candidates/"+data.image;
     div.appendChild(headshot);
-
     name.textContent = data.name;
     div.appendChild(name);
     synopsis.textContent = data.synopsis;
     div.appendChild(synopsis)
+    div.classList.add('candidate_shot');
 
-    rollover.classList.add('rollover');
-
-    tweetLink.classList.add('tweet_link');
-    rollover.appendChild(tweetLink);
-
-    infoLink.classList.add('info_link');
-    infoLink.textContent = 'i';
-    rollover.appendChild(infoLink);
-
-    div.appendChild(rollover);
 
     return div;
 };
@@ -1449,59 +1437,59 @@ var STATES = {
 var CANDIDATES=[
 {
     name:"Chris Christie",
-    image:"images/pres_candidates/chris_christie.jpg"
+    image:"chris_christie.jpg"
 },
 {
     name:"Carly Fiorina",
-    image:"images/pres_candidates/carly_fiorina.jpg"
+    image:"carly_fiorina.jpg"
 },
 {
     name:"Jeb Bush",
-    image:"images/pres_candidates/jeb_bush.jpg"
+    image:"jeb_bush.jpg"
 },
 {
     name:"Ben Carson",
-    image:"images/pres_candidates/ben_carson.jpg"
+    image:"ben_carson.jpg"
 },
 {
     name:"Ted Cruz",
-    image:"images/pres_candidates/ted_cruz.jpg"
+    image:"ted_cruz.jpg"
 },
 {
     name:"Mike Huckabee",
-    image:"images/pres_candidates/mike_huckabee.jpg"
+    image:"mike_huckabee.jpg"
 },
 {
     name:"Rand Paul",
-    image:"images/pres_candidates/rand_paul.jpg"
+    image:"rand_paul.jpg"
 },
 {
     name:"Marco Rubio",
-    image:"images/pres_candidates/marco_rubio.jpg"
+    image:"marco_rubio.jpg"
 },
 {
     name:"Rick Santorum",
-    image:"images/pres_candidates/rick_santorum.jpg"
+    image:"rick_santorum.jpg"
 },
 {
     name:"Donald Trump",
-    image:"images/pres_candidates/donald_trump.jpg"
+    image:"donald_trump.jpg"
 },
 {
     name:"John Kasich",
-    image:"images/pres_candidates/john_kasich.jpg"
+    image:"john_kasich.jpg"
 },
 {
     name:"Hillary Clinton",
-    image:"images/pres_candidates/hilary_clinton.jpg"
+    image:"hilary_clinton.jpg"
 },
 {
     name:"Bernie Sanders",
-    image:"images/pres_candidates/bernie_sanders.jpg"
+    image:"bernie_sanders.jpg"
 },
 {
     name:"Martin O'Malley",
-    image:"images/pres_candidates/bernie_sanders.jpg"
+    image:"martin_o_malley.jpg"
 }
 ];
 
@@ -1579,7 +1567,6 @@ xhr_candidates.onreadystatechange= function(){
                 new CandidateModalController({model: model});
             }
         }
-
         new CandidatesTableController({
             inject:"#candidates",
             collection:candidates
