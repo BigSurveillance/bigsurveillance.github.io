@@ -1033,6 +1033,7 @@ var Candidates = Composer.Collection.extend({
 
 ;var CandidateView = function(data) {
     var
+        a = $c('a'),
         div = $c('div'),
         headshot = $c('div'),
         img = $c('img'),            // JL NOTE ~ chrome bug fix, remove after issue is gone
@@ -1051,9 +1052,10 @@ var Candidates = Composer.Collection.extend({
     synopsis.textContent = data.synopsis;
     div.appendChild(synopsis)
     div.classList.add('candidate_shot');
-
-
-    return div;
+    a.href=""
+    a.appendChild(div)
+    a.classList.add('clickable')
+    return a;
 };
 
 ;var CandidateModalView = function(data){
@@ -1436,14 +1438,6 @@ var STATES = {
 
 var CANDIDATES=[
 {
-    name:"Chris Christie",
-    image:"chris_christie.jpg"
-},
-{
-    name:"Carly Fiorina",
-    image:"carly_fiorina.jpg"
-},
-{
     name:"Jeb Bush",
     image:"jeb_bush.jpg"
 },
@@ -1456,20 +1450,8 @@ var CANDIDATES=[
     image:"ted_cruz.jpg"
 },
 {
-    name:"Mike Huckabee",
-    image:"mike_huckabee.jpg"
-},
-{
-    name:"Rand Paul",
-    image:"rand_paul.jpg"
-},
-{
     name:"Marco Rubio",
     image:"marco_rubio.jpg"
-},
-{
-    name:"Rick Santorum",
-    image:"rick_santorum.jpg"
 },
 {
     name:"Donald Trump",
@@ -1490,6 +1472,26 @@ var CANDIDATES=[
 {
     name:"Martin O'Malley",
     image:"martin_o_malley.jpg"
+},
+{
+    name:"Rand Paul",
+    image:"rand_paul.jpg"
+},
+{
+    name:"Chris Christie",
+    image:"chris_christie.jpg"
+},
+{
+    name:"Carly Fiorina",
+    image:"carly_fiorina.jpg"
+},
+{
+    name:"Rick Santorum",
+    image:"rick_santorum.jpg"
+},
+{
+    name:"Mike Huckabee",
+    image:"mike_huckabee.jpg"
 }
 ];
 

@@ -4353,4 +4353,11 @@ iframe.map {
   text-align: center;
   background: #232330;
 }
+.clickable {
+  text-decoration: none;
+}
+.candidate_shot:hover {
+  background: #212140;
+  border-radius: 30px;
+}
 /*# sourceMappingURL=dist/css/core.css.map */
